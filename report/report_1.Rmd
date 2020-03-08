@@ -1,0 +1,65 @@
+---
+title: "exercise_1"
+author: "Fanglin Liu"
+date: "2020/3/8"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+excercise_1: lean R using data from R package
+
+```{r}
+rm(list = ls())
+```
+
+cleaning the current environment
+
+```{r}
+library(ade4)
+data(package = "ade4")
+data("doubs")
+str(doubs)
+```
+
+there are 4 list, each with several obs.
+
+```{r}
+mydata <- doubs$env
+head(mydata)
+```
+
+check the first 6 lines of the data 
+
+```{r}
+mydata <- mydata[,-1]
+head(mydata)
+```
+
+delete the first column of the data
+
+```{r}
+hist(mydata$alt,
+     col = "green",
+     main = "altitude distribution",
+     xlab = "altitude")
+```
+
+check the distribution of the variable of altitude
+
+```{r}
+library(corrplot)
+res1 <- cor(mydata)
+res1
+```
+
+calculate the coefficients of these variables
+
+```{r}
+library(psych)
+pairs.panels(mydata[,2:6])
+```
+
+find which are strongly correlated
